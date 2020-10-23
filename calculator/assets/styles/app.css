@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', open-sans;
+}
+
+body {
+  margin: 0;
+  background: lightgrey;
+}
+
+header {
+  background: #4a76a8;
+  color: white;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  width: 100%;
+  margin: 0;
+  padding: 15px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+#top-calculator,
+#calculator {
+  max-width: 300px;
+  border: 1px solid black;
+  border-radius: 20px;
+  color: white;
+  margin: 30px auto;
+  background: black;
+}
+
+/* #calculator {
+} */
+#overflow {
+    overflow: hidden;
+    padding: 15px 0;
+    max-height: 190px;
+}
+
+#top-calculator {
+  text-align: left;
+  min-height: 200px;
+}
+
+#results {
+    max-height: 200px;
+    overflow-y: scroll;
+    margin-right: -20px;
+}
+
+#top-calculator p {
+    padding: 0 15px;
+    margin: 0;
+}
+
+#calculator input {
+  font: inherit;
+  width: 100%;
+  margin: 15px auto;
+  display: block;
+  text-align: right;
+  background: black;
+  border: none;
+  font-size: 50px;
+  padding: 0 10px;
+  color: white;
+}
+
+#calculator input::placeholder {
+    color: white;
+}
+
+#calculator input:focus {
+  outline: none;
+}
+
+table {
+    margin: 10px auto;
+}
+
+#calculator button {
+  font: inherit;
+  background: #023d6d;
+  border: 1px solid #023d6d;
+  cursor: pointer;
+  font-size: 30px;
+  width: 60px;
+  height: 60px;
+  color: white;
+}
+
+#calculator button:focus {
+  outline: none;
+}
+
+
+#calc-actions button {
+  border-radius: 32px;
+}
+
+#calc-actions #btn-zero {
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+#calculator button {
+    background: grey;
+    border-color: grey;
+}
+
+#calculator tr:first-child button {
+    background: lightgrey;
+    border-color: lightgrey;
+    color: black;
+}
+
+#calculator td:last-child button {
+    background: orange;
+    border-color: orange;
+    color: white;
+}
+
+td {
+    padding: 5px;
+}
+
+#calculator button:hover,
+#calculator button:active {
+    background: rgba(211, 211, 211, 0.9);
+    border-color: lightgrey;
+    /* opacity: 0.1; */
+}
+
+
+#calc-actions {
+  text-align: center;
+}

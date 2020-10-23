@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="assets/scripts/vendor.js" defer></script>
+    <script src="assets/scripts/app.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles/app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>The Unconventional Calculator</h1>
+    </header>
+
+    <section id="top-calculator">
+        <div id="overflow">
+            <div id="results">
+
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator">
+      <input id="input-number" readonly="readonly" placeholder="0"/>
+      <div id="calc-actions">
+        <table>
+            <tr>
+                <td><button type="button" id="btn-ac">AC</button></td>
+                <td><button type="button" id="btn-plus-on-minus">+/-</button></td>
+                <td><button type="button" id="btn-percent">%</button></td>
+                <td><button type="button" id="btn-division">÷</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" id="btn-seven">7</button></td>
+                <td><button type="button" id="btn-eight">8</button></td>
+                <td><button type="button" id="btn-nine">9</button></td>
+                <td><button type="button" id="btn-multiply">×</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" id="btn-four">4</button></td>
+                <td><button type="button" id="btn-five">5</button></td>
+                <td><button type="button" id="btn-six">6</button></td>
+                <td><button type="button" id="btn-minus">-</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" id="btn-one">1</button></td>
+                <td><button type="button" id="btn-two">2</button></td>
+                <td><button type="button" id="btn-three">3</button></td>
+                <td><button type="button" id="btn-plus">+</button></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="button" id="btn-zero">0</button></td>
+                <td><button type="button" id="btn-dot">,</button></td>
+                <td><button type="button" id="btn-result">=</button></td>
+            </tr>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>
