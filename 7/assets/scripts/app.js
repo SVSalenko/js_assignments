@@ -14,6 +14,8 @@ const yourRating = document.getElementById('rating');
 const entryText = document.getElementById('entry-text');
 const movieList = document.getElementById('movie-list');
 
+const movieListData = [];
+
 function showAddModal() {
     addModal.classList.add('visible');
     backdrop.classList.add('visible');
@@ -40,32 +42,39 @@ function addMovie() {
     } else {
         entryText.style.display = 'none';
 
-        movieList.innerHTML +=  '<li class="movie-element">' +
-                                    `<div class="movie-element__image"><img src='${imageURL.value}' alt='${movieTitle.value}'></div>` +
-                                    '<div class="movie-element__info">' +
-                                        `<h2>${movieTitle.value}</h2>` +
-                                        `<p>${yourRating.value}/5 stars</p>` +
-                                    '</div>' +
-                                '</li>';
-
-        for (let elem of movieList.querySelectorAll('.movie-element')) {
-            elem.addEventListener('click', function () {
-                deleteModal.classList.add('visible');
-                backdrop.classList.add('visible');
-
-                btnYes.addEventListener('click', function () {
-                    elem.remove();
-                    hideModal();
-                    if (movieList.querySelector('.movie-element') === null) {
-                        entryText.style.display = 'block';
-                    }
-                });
-            })
-        }
-
+        let element = document.createElement('li');
+        element.id = Math.random();
+        element.classList.add('movie-element');
+        element.innerHTML = `<div class="movie-element__image"><img src='${imageURL.value}' alt='${movieTitle.value}'></div>` +
+                            '<div class="movie-element__info">' +
+                                `<h2>${movieTitle.value}</h2>` +
+                                `<p>${yourRating.value}/5 stars</p>` +
+                            '</div>';
+        movieList.appendChild(element);
         hideModal();
+        element.addEventListener('click', removeMovie.bind(null, element.id));
+        movieListData.push({
+            id: element.id,
+            title: movieTitle.value,
+            image: imageURL.value,
+            rating: yourRating.value
+        })
     }
 }
+
+function removeMovie(id) {
+    let element = document.getElementById(id);
+    showDeleteModal();
+    btnYes.onclick = function () {
+        element.remove();
+        hideModal();
+        for (var movie of movieListData) {
+            if (movie.id === id) {
+                movieListData.splice(movieListData.indexOf(movie), 1);
+            }
+        }
+    }
+};
 
 btnAdd.addEventListener('click', addMovie);
 btnNoCancel.addEventListener('click', hideModal);
