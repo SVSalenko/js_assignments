@@ -12,6 +12,10 @@ class Project {
     }
 
     showInfo() {
+        if (this.parentNode.querySelector('#info')) {
+            this.parentNode.querySelector('#info').remove()
+        }
+
         let id = this.parentNode.getAttribute('id');
         let tooltip = document.createElement('div');
         tooltip.innerHTML = `ID of this project: ${id}`;
@@ -21,7 +25,8 @@ class Project {
         tooltip.style.borderRadius = '5px';
         tooltip.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
         tooltip.addEventListener('click', () => tooltip.remove());
-        document.querySelector('body').append(tooltip);
+        // document.querySelector('body').append(tooltip);
+        this.parentNode.append(tooltip);
     }
 }
 
@@ -38,6 +43,10 @@ class ActiveProject extends Project {
     }
 
     moveProject() {
+        if (this.parentNode.querySelector('#info')) {
+            this.parentNode.querySelector('#info').remove()
+        }
+
         document.getElementById('finished-projects').querySelector('ul').append(this.parentNode);
         let newButtom = document.createElement('button')
         newButtom.innerHTML = 'Activate';
@@ -60,6 +69,10 @@ class FinishedProject extends Project {
     }
 
     moveProject() {
+        if (this.parentNode.querySelector('#info')) {
+            this.parentNode.querySelector('#info').remove()
+        }
+
         document.getElementById('active-projects').querySelector('ul').append(this.parentNode);
         let newButtom = document.createElement('button')
         newButtom.innerHTML = 'Finish';
