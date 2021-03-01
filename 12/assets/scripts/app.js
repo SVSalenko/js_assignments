@@ -12,7 +12,16 @@ class Project {
     }
 
     showInfo() {
-        alert(this.parentNode.getAttribute('id'));
+        let id = this.parentNode.getAttribute('id');
+        let tooltip = document.createElement('div');
+        tooltip.innerHTML = `ID of this project: ${id}`;
+        tooltip.id = 'info';
+        tooltip.style.padding = '10px';
+        tooltip.style.marginTop = '5px';
+        tooltip.style.borderRadius = '5px';
+        tooltip.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
+        tooltip.addEventListener('click', () => tooltip.remove());
+        document.querySelector('body').append(tooltip);
     }
 }
 
