@@ -28,50 +28,64 @@ class Project {
         this.parentNode.append(tooltip);
     }
 
+    switchProject() {
+        let relocatableProjects = document.getElementById(this.relocatableProjectType).querySelector('ul');
+        let destinationProjects = document.getElementById(this.destinationProjectType).querySelector('ul');
+
+        relocatableProjects.addEventListener('click', (event) => {
+            if (event.target.innerHTML === 'Finish' || event.target.innerHTML === 'Activate') {
+                this.moveProject(event.target.parentNode);
+            }
+        });
+
+        relocatableProjects.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('projectId', event.target.id);
+        });
+
+        destinationProjects.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            relocatableProjects.classList.remove('drop');
+            destinationProjects.classList.add('drop');
+        });
+
+        destinationProjects.addEventListener('drop', (event) => {
+            event.preventDefault();
+            let project = document.getElementById(event.dataTransfer.getData('projectId'));
+            this.moveProject(project);
+        });
+
+        destinationProjects.addEventListener('dragend', (event) => {
+            destinationProjects.classList.remove('drop');
+        });
+    }
+
     moveProject(project) {
-        if (project.parentNode.querySelector('#info')) {
-            project.parentNode.querySelector('#info').remove()
+        if (project.querySelector('#info')) {
+            project.querySelector('#info').remove();
         }
 
-        document.getElementById(this.projectType).querySelector('ul').append(project.parentNode);
-        let newButtom = document.createElement('button')
-        newButtom.innerHTML = this.text;
-        project.parentNode.append(newButtom);
-        project.remove();
+        document.getElementById(this.destinationProjectType).querySelector('ul').append(project);
+        project.querySelector('button:last-child').innerHTML = this.textButton;
     }
 }
 
 class ActiveProject extends Project {
     constructor() {
         super();
-        this.completeProject()
-        this.projectType = 'finished-projects';
-        this.text = 'Activate'
-    }
-
-    completeProject() {
-        document.getElementById('active-projects').querySelector('ul').addEventListener('click', (event) => {
-            if (event.target.innerHTML === 'Finish') {
-                this.moveProject(event.target);
-            }
-        });
+        this.textButton = 'Activate';
+        this.relocatableProjectType = 'active-projects';
+        this.destinationProjectType = 'finished-projects';
+        this.switchProject();
     }
 }
 
 class FinishedProject extends Project {
     constructor() {
         super();
-        this.activateProject()
-        this.projectType = 'active-projects';
-        this.text = 'Finish'
-    }
-
-    activateProject() {
-        document.getElementById('finished-projects').querySelector('ul').addEventListener('click', (event) => {
-            if (event.target.innerHTML === 'Activate') {
-                this.moveProject(event.target);
-            }
-        });
+        this.textButton = 'Finish';
+        this.relocatableProjectType = 'finished-projects';
+        this.destinationProjectType = 'active-projects';
+        this.switchProject();
     }
 }
 
