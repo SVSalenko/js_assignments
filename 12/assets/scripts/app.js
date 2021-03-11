@@ -25,8 +25,19 @@ class Project {
         tooltip.style.borderRadius = '5px';
         tooltip.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
         tooltip.addEventListener('click', () => tooltip.remove());
-        // document.querySelector('body').append(tooltip);
         this.parentNode.append(tooltip);
+    }
+
+    moveProject(project) {
+        if (project.parentNode.querySelector('#info')) {
+            project.parentNode.querySelector('#info').remove()
+        }
+
+        document.getElementById(this.projectType).querySelector('ul').append(project.parentNode);
+        let newButtom = document.createElement('button')
+        newButtom.innerHTML = this.text;
+        project.parentNode.append(newButtom);
+        project.remove();
     }
 }
 
@@ -34,25 +45,16 @@ class ActiveProject extends Project {
     constructor() {
         super();
         this.completeProject()
+        this.projectType = 'finished-projects';
+        this.text = 'Activate'
     }
 
     completeProject() {
-        for (var variable of document.getElementById('active-projects').querySelector('ul').querySelectorAll('li')) {
-            variable.querySelector('button:last-child').addEventListener('click', this.moveProject);
-        }
-    }
-
-    moveProject() {
-        if (this.parentNode.querySelector('#info')) {
-            this.parentNode.querySelector('#info').remove()
-        }
-
-        document.getElementById('finished-projects').querySelector('ul').append(this.parentNode);
-        let newButtom = document.createElement('button')
-        newButtom.innerHTML = 'Activate';
-        this.parentNode.append(newButtom);
-        this.remove();
-        Lists.update();
+        document.getElementById('active-projects').querySelector('ul').addEventListener('click', (event) => {
+            if (event.target.innerHTML === 'Finish') {
+                this.moveProject(event.target);
+            }
+        });
     }
 }
 
@@ -60,39 +62,23 @@ class FinishedProject extends Project {
     constructor() {
         super();
         this.activateProject()
+        this.projectType = 'active-projects';
+        this.text = 'Finish'
     }
 
     activateProject() {
-        for (var variable of document.getElementById('finished-projects').querySelector('ul').querySelectorAll('li')) {
-            variable.querySelector('button:last-child').addEventListener('click', this.moveProject);
-        }
-    }
-
-    moveProject() {
-        if (this.parentNode.querySelector('#info')) {
-            this.parentNode.querySelector('#info').remove()
-        }
-
-        document.getElementById('active-projects').querySelector('ul').append(this.parentNode);
-        let newButtom = document.createElement('button')
-        newButtom.innerHTML = 'Finish';
-        this.parentNode.append(newButtom);
-        this.remove();
-        Lists.update();
-    }
-}
-
-class Lists {
-    static update() {
-        const ActiveProjectsList = new ActiveProject();
-        const FinishedProjectsList = new FinishedProject();
+        document.getElementById('finished-projects').querySelector('ul').addEventListener('click', (event) => {
+            if (event.target.innerHTML === 'Activate') {
+                this.moveProject(event.target);
+            }
+        });
     }
 }
 
 class App {
     static init() {
-        const ProjectsList = new Project();
-        Lists.update();
+        const ActiveProjectsList = new ActiveProject();
+        const FinishedProjectsList = new FinishedProject();
     }
 }
 
